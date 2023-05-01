@@ -1,8 +1,11 @@
-# Building an App Social
+# Building an E-Commerce
 
 ## Used
 
+- **Frontend:**
+
 - **Backend:**
+
   - [Nodejs](https://nodejs.org/en/)
   - [Nodemon](https://www.npmjs.com/package/nodemon)
   - [ExpressJs](https://expressjs.com/)
@@ -28,19 +31,6 @@ $ cd <project_dir>
 $ yarn install
 $ yarn start
 ```
-
-## _Note_
-
-- Cloning out 1 array or 1 object is good but can't create a deep copy of the value i.e. it recursively clones the value
-
-- Example:
-  ```bash
-  const cloneCard = [...card];
-  ```
-- Solution: using [Lodash](https://www.npmjs.com/package/lodash)
-- [cloneDeep](https://github.com/lodash/lodash/blob/master/cloneDeep.js)
-- `import {cloneDeep} from 'lodash'`
-- Object inheritance is preserved.
 
 ## My website Blog
 

@@ -1,4 +1,12 @@
 ### E-commerce
 
 ### Login
-GET http://localhost:8080
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name":"Felizz",
+    "email":"Felizz@gmail.com",
+    "password":"123456",
+    "mobile":"239470"
+}

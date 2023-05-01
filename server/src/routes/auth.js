@@ -4,6 +4,6 @@ const userController = require("../controllers/User");
 
 // CRUD | Create | Read | Update | Delete
 
-router.get("/register", userController.register);
+router.post("/register", userController.register);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose"); // Erase if already required
 const Schema = mongoose.Schema;
+const argon2 = require("argon2");
 
 const userSchema = new Schema(
   {
@@ -17,7 +18,6 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-
     password: {
       type: String,
       required: true,
@@ -55,6 +55,21 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+//Pre middleware functions are executed one after another, when each middleware calls 'next'.
+//In Schema can't using arrow func to call this, so we need using function()
+userSchema.pre("save", async function (next) {
+  try {
+    // if password change -> true
+    if (this.isModified("password")) {
+      const hashPassword = await argon2.hash(this.password);
+      this.password = hashPassword;
+    }
+    next();
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //Export the model
 module.exports = mongoose.model("Users", userSchema);

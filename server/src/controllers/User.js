@@ -8,7 +8,7 @@ class UserController {
    */
 
   async register(req, res) {
-    const { name, email, password } = req.body;
+    const { name, email, password, mobile } = req.body;
 
     if (!name || !password || !email) {
       return (
@@ -22,9 +22,10 @@ class UserController {
     try {
       //check existing user
       const user = await User.findOne({ name });
+      const userEmail = await User.findOne({ email });
 
       //user taken
-      if (user) {
+      if (user || userEmail) {
         return res.status(400).json({
           success: false,
           message: "User already taken",
@@ -35,6 +36,7 @@ class UserController {
         name,
         password,
         email,
+        mobile,
       });
       //save User
       await newUser.save();
@@ -42,6 +44,7 @@ class UserController {
       res.status(200).json({
         success: true,
         message: "User created successfully",
+        newUser,
       });
     } catch (err) {
       console.error(err);
